@@ -1,5 +1,5 @@
 import express from 'express';
-import { createFertilizer, deleteFertilizer, getAllFertilizers, getFertilizerById, updateFertilizer } from '../controllers/fertilizerController';
+import { createFertilizer, deleteFertilizer, getAllFertilizers, getFertilizerById, updateFertilizer } from '../controllers/fertilizerController.js';
 const router = express.Router();
 router.post('/create', createFertilizer);
 router.get('/getFertilizers', getAllFertilizers);

@@ -1,5 +1,5 @@
 import express from 'express';
-import { addDetails, deleteDetails, getDetails, getDetailsById, updateDetails } from '../controllers/detailsController';
+import { addDetails, deleteDetails, getDetails, getDetailsById, updateDetails } from '../controllers/detailsController.js';
 const router = express.Router();
 router.post('/add', addDetails);
 router.get('/getDetails/:userId', getDetails);

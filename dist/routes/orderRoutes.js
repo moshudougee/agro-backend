@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteOrder, getAllOrders, getMyOrders, getOrderById, placeOrder, updateOrder } from "../controllers/orderController";
+import { deleteOrder, getAllOrders, getMyOrders, getOrderById, placeOrder, updateOrder } from "../controllers/orderController.js";
 const router = express.Router();
 router.post("/create", placeOrder);
 router.get("/getAllOrders", getAllOrders);

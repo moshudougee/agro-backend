@@ -1,5 +1,5 @@
 import express from 'express';
-import { createSeeds, deleteSeed, getAllSeeds, getSeedById, updateSeed } from '../controllers/seedsController';
+import { createSeeds, deleteSeed, getAllSeeds, getSeedById, updateSeed } from '../controllers/seedsController.js';
 const router = express.Router();
 router.post('/create', createSeeds);
 router.get('/getSeeds', getAllSeeds);
