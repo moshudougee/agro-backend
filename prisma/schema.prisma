@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  email     String  @unique
+  password  String
+  role      Role    @default(FARMER)
+  orders    Order[]
+  details   FarmerDetails?
+}
+
+model Order {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  farmerId      String  @db.ObjectId
+  orderUnit     Json[]
+  totalAmt      Float
+  paid          Boolean @default(false)
+  status        OrderStatus @default(PENDING)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  farmer        User    @relation(fields: [farmerId], references: [id])
+}
+
+model Seeds {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  price         Float
+  fertilizerIDs String[]  @db.ObjectId
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  fertilizers   Fertilizer[]  @relation("SeedsToFertilizers", fields: [fertilizerIDs] , references: [id])
+}
+
+model Fertilizer {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  price       Float
+  seedsIDs    String[]  @db.ObjectId
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  seeds       Seeds[]  @relation("SeedsToFertilizers", fields: [seedsIDs] , references: [id])
+}
+
+model FarmerDetails {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  farmerId  String  @db.ObjectId @unique
+  name      String
+  phone     String
+  address   String
+  city      String
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  farmer      User    @relation(fields: [farmerId], references: [id])
+}
+
+enum Role {
+  FARMER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+

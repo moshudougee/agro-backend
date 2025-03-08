@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Target JavaScript version
+    "module": "ES2022", // Use ES modules
+    "moduleResolution": "node",
+    "outDir": "./dist", // Output directory for compiled JS files
+    "rootDir": "./src", // Root directory for TypeScript files
+    "allowJs": true,
+    "strict": true, // Enable strict type-checking
+    "esModuleInterop": true, // Enable ES module interop
+    "skipLibCheck": true, // Skip library checks
+    "forceConsistentCasingInFileNames": true, // Ensure consistent file naming
+    "allowSyntheticDefaultImports": true
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src/**/*"], // Include all TypeScript files
+  "exclude": ["node_modules"] // Exclude node_modules
+}
